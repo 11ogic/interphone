@@ -24,7 +24,7 @@ func main() {
 		"3. quit",
 		"------------------------------------------------------------------",
 	}
-
+Loop:
 	for {
 		for _, val := range prologue {
 			fmt.Println(val)
@@ -45,7 +45,7 @@ func main() {
 				continue
 			} else {
 				fmt.Println("go login")
-				break
+				break Loop
 			}
 		case 2:
 			var (
@@ -61,7 +61,7 @@ func main() {
 				continue
 			} else {
 				fmt.Println("go registry")
-				break
+				break Loop
 			}
 		case 3:
 			os.Exit(1)
