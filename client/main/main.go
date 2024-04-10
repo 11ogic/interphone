@@ -42,7 +42,7 @@ Loop:
 			fmt.Scanf("%v", &password)
 
 			if strings.Trim(username, "") == "" || strings.Trim(password, "") == "" {
-				continue
+				continue Loop
 			} else {
 				fmt.Println("go login")
 				break Loop
@@ -58,7 +58,7 @@ Loop:
 			fmt.Scanf("%v", &password)
 
 			if strings.Trim(username, "") == "" || strings.Trim(password, "") == "" {
-				continue
+				continue Loop
 			} else {
 				fmt.Println("go registry")
 				break Loop
@@ -66,7 +66,7 @@ Loop:
 		case 3:
 			os.Exit(1)
 		default:
-			continue
+			continue Loop
 		}
 	}
 
