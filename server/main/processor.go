@@ -1,8 +1,8 @@
 package main
 
 import (
-	"awesomeProject/common"
-	"awesomeProject/utils"
+	"awesomeProject/server/common"
+	"awesomeProject/server/utils"
 	"errors"
 	"fmt"
 	"io"

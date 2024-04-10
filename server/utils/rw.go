@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"awesomeProject/common"
+	"awesomeProject/server/common"
 	"encoding/binary"
 	"encoding/json"
 	"errors"
