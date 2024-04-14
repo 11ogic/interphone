@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"awesomeProject/server/common"
+	"awesomeProject/common"
 	"encoding/binary"
 	"encoding/json"
 	"errors"
@@ -49,8 +49,6 @@ func (m *Message) WriteData(inter interface{}) (err error) {
 	binary.BigEndian.PutUint32(sizeBuf[:4], size)
 	n, err := m.C.Write(sizeBuf[:])
 	if n != 4 || err != nil {
-		fmt.Println(n)
-		fmt.Println(err)
 		return errors.New("failed to write size")
 	}
 	n, err = m.C.Write(sendData)

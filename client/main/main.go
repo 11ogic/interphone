@@ -1,6 +1,7 @@
 package main
 
 import (
+	"awesomeProject/client/process"
 	"fmt"
 	"net"
 	"os"
@@ -12,7 +13,7 @@ var (
 )
 
 func main() {
-	_, err := net.Dial("tcp", ":8080")
+	n, err := net.Dial("tcp", ":8080")
 	if err != nil {
 		fmt.Println("link failure")
 		return
@@ -32,21 +33,7 @@ Loop:
 		fmt.Scanf("%d", &state)
 		switch state {
 		case 1:
-			var (
-				username string
-				password string
-			)
-			fmt.Println("enter your username")
-			fmt.Scanf("%v", &username)
-			fmt.Println("enter your password")
-			fmt.Scanf("%v", &password)
-
-			if strings.Trim(username, "") == "" || strings.Trim(password, "") == "" {
-				continue Loop
-			} else {
-				fmt.Println("go login")
-				break Loop
-			}
+			process.Login(n)
 		case 2:
 			var (
 				username string

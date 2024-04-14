@@ -1,7 +1,7 @@
 package main
 
 import (
-	"awesomeProject/server/common"
+	"awesomeProject/common"
 	"awesomeProject/server/utils"
 	"errors"
 	"fmt"
@@ -37,6 +37,7 @@ func (p *processor) dispatch(req *common.RequestType) (err error) {
 		fmt.Println("enter SMS")
 	case common.User:
 		fmt.Println("enter User")
+		fmt.Printf("%+v", req.Data)
 	default:
 		fmt.Println("unknown type")
 	}
