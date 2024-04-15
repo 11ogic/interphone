@@ -2,6 +2,7 @@ package main
 
 import (
 	"awesomeProject/common"
+	"awesomeProject/server/process"
 	"awesomeProject/server/utils"
 	"errors"
 	"fmt"
@@ -15,10 +16,10 @@ type processor struct {
 
 func (p *processor) receive() (err error) {
 	for {
-		m := &utils.Message{
+		s := &utils.Socket{
 			C: p.Conn,
 		}
-		req, err := m.ReadData()
+		req, err := s.ReadData()
 		if err != nil {
 			if err == io.EOF {
 				return errors.New("disconnect from client")
@@ -38,6 +39,9 @@ func (p *processor) dispatch(req *common.RequestType) (err error) {
 	case common.User:
 		fmt.Println("enter User")
 		fmt.Printf("%+v", req.Data)
+		u := process.User{
+			c: p.Conn,
+		}
 	default:
 		fmt.Println("unknown type")
 	}

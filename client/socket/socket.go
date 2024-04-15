@@ -9,7 +9,8 @@ import (
 )
 
 type Fetch struct {
-	C net.Conn
+	C   net.Conn
+	buf [8192]byte
 }
 
 func (f *Fetch) Write(typ string, data interface{}) (err error) {
@@ -37,6 +38,16 @@ func (f *Fetch) Write(typ string, data interface{}) (err error) {
 	return
 }
 
-func (f *Fetch) Read() {
-
+func (f *Fetch) Read() (res *common.ResponseType, err error) {
+	n, err := f.C.Read(f.buf[:4])
+	if n != 4 || err != nil {
+		return
+	}
+	size := binary.BigEndian.Uint32(f.buf[:4])
+	n, err = f.C.Read(f.buf[:])
+	if uint32(n) != size || err != nil {
+		return
+	}
+	err = json.Unmarshal(f.buf[:n], res)
+	return
 }

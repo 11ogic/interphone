@@ -9,11 +9,6 @@ import (
 	"strings"
 )
 
-type LoginReq struct {
-	Username string
-	Password string
-}
-
 func Login(n net.Conn) (err error) {
 	username := ""
 	password := ""
@@ -28,7 +23,12 @@ func Login(n net.Conn) (err error) {
 		return
 	} else {
 		f := socket.Fetch{C: n}
-		f.Write(common.User, LoginReq{username, password})
+		f.Write(common.User, common.LoginReq{Username: username, Password: password})
+		res, err := f.Read()
+		if err != nil {
+			return errors.New("read failed")
+		}
+		fmt.Printf("%+v", res)
 	}
 	return
 }
