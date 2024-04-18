@@ -4,6 +4,7 @@ import (
 	"awesomeProject/common"
 	"awesomeProject/server/process"
 	"awesomeProject/server/utils"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -40,8 +41,15 @@ func (p *processor) dispatch(req *common.RequestType) (err error) {
 		fmt.Println("enter User")
 		fmt.Printf("%+v", req.Data)
 		u := process.User{
-			c: p.Conn,
+			C: p.Conn,
 		}
+		data := common.LoginReq{}
+		fmt.Println("bytes", []byte(req.Data))
+		err = json.Unmarshal([]byte(req.Data), &data)
+		if err != nil {
+			return
+		}
+		u.Login(data)
 	default:
 		fmt.Println("unknown type")
 	}

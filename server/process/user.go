@@ -7,12 +7,12 @@ import (
 )
 
 type User struct {
-	c net.Conn
+	C net.Conn
 }
 
 func (u *User) Login(req common.LoginReq) {
 	s := utils.Socket{
-		C: u.c,
+		C: u.C,
 	}
 	if req.Username != "haven" || req.Password != "123" {
 		s.WriteData(&common.LoginRes{
