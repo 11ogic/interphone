@@ -48,6 +48,8 @@ func (f *Fetch) Read() (res *common.ResponseType, err error) {
 	if uint32(n) != size || err != nil {
 		return
 	}
+	res = &common.ResponseType{}
 	err = json.Unmarshal(f.buf[:n], res)
+	fmt.Printf("read: size = %d content = %+v", size, res)
 	return
 }

@@ -14,7 +14,7 @@ func (u *User) Login(req *common.LoginReq) {
 	s := utils.Socket{
 		C: u.C,
 	}
-	if req.Username != "haven" || req.Password != "123" {
+	if req.Username == "haven" && req.Password == "123" {
 		s.WriteData(common.LoginRes{
 			Token: "12oj4019nnq",
 		}, 200, "success")

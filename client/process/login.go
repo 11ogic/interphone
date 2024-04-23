@@ -25,10 +25,9 @@ func Login(n net.Conn) (err error) {
 		f := socket.Fetch{C: n}
 		f.Write(common.User, common.LoginReq{Username: username, Password: password})
 		res, err := f.Read()
-		if err != nil {
-			return errors.New("read failed")
+		if err != nil || res.Code != 200 {
+			return errors.New("login failed")
 		}
-		fmt.Printf("res: %+v", res)
 	}
 	return
 }
