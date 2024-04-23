@@ -43,7 +43,7 @@ func (f *Fetch) Read() (res *common.ResponseType, err error) {
 	if n != 4 || err != nil {
 		return
 	}
-	size := binary.BigEndian.Uint32(f.buf[:4])
+	size := binary.BigEndian.Uint32(f.buf[:n])
 	n, err = f.C.Read(f.buf[:])
 	if uint32(n) != size || err != nil {
 		return

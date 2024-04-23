@@ -39,13 +39,11 @@ func (p *processor) dispatch(req *common.RequestType) (err error) {
 		fmt.Println("enter SMS")
 	case common.User:
 		fmt.Println("enter User")
-		fmt.Printf("%+v", req.Data)
 		u := process.User{
 			C: p.Conn,
 		}
-		data := common.LoginReq{}
-		fmt.Println("bytes", []byte(req.Data))
-		err = json.Unmarshal([]byte(req.Data), &data)
+		data := &common.LoginReq{}
+		err = json.Unmarshal([]byte(req.Data), data)
 		if err != nil {
 			return
 		}

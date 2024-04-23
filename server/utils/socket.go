@@ -24,12 +24,13 @@ func (s *Socket) ReadData() (req *common.RequestType, err error) {
 	if err != nil || size != uint32(n) {
 		err = errors.New("read fail")
 	}
+	req = &common.RequestType{}
 	err = json.Unmarshal(s.buf[:size], req)
 	if err != nil {
 		fmt.Println(string(s.buf[:n]))
 		return
 	}
-	fmt.Printf("size = %d; content = %+v \n", size, req)
+	fmt.Printf("read: size = %d; content = %+v \n", size, req)
 	return
 }
 
@@ -54,6 +55,6 @@ func (s *Socket) WriteData(inter interface{}, code uint32, msg string) (err erro
 	if n != int(size) || err != nil {
 		return errors.New("failed to write sendData")
 	}
-
+	fmt.Printf("write: size = %d; content = %+v \n", size, request)
 	return
 }

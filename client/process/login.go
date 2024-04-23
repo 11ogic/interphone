@@ -28,7 +28,7 @@ func Login(n net.Conn) (err error) {
 		if err != nil {
 			return errors.New("read failed")
 		}
-		fmt.Printf("%+v", res)
+		fmt.Printf("res: %+v", res)
 	}
 	return
 }
